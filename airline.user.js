@@ -13,7 +13,7 @@
 (function() {
     "use strict";
 
-    var logLevel = 0;
+    var logLevel = 1;
 
     var startAirport = $("#dep").val();
     var endAirport = $("#arr").val();
@@ -118,12 +118,18 @@
         var h = $("#timeH").val();
         var m = $("#timeM").val();
         $("#depTime").text(makeTime(h,m));
-        var depMin =  h*60+m;
+        var depMin =  h*60+1*m;
+        log("Departure: " + depMin, 4);
+        log("TimeDiff: " + timeDiff, 4);
+        log("FlightTime: " + flightTime, 4);
         var arrTime = (depMin + flightTime - timeDiff)%(24*60);
+        log("Arrival: " + arrTime, 4);
         $("#arrTime").text(minToTime(arrTime));
-        var rDepTime = arrTime + turnTime%(24*60);
+        var rDepTime = (arrTime + turnTime)%(24*60);
+        log("Return Departure: " + rDepTime, 4);
         $("#rDepTime").text(minToTime(rDepTime));
         var rArrTime = (rDepTime + flightTime + timeDiff)%(24*60);
+        log("Return Arrival: " + rArrTime, 4);
         $("#rArrTime").text(minToTime(rArrTime));
     }
 
