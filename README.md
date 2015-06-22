@@ -1,5 +1,7 @@
 # asAeroAddOn Script #
 
+[![Build Status](https://travis-ci.org/reddi1/asAeroAddOn.svg?branch=master)](https://travis-ci.org/reddi1/asAeroAddOn)
+
 ## Purpose ##
 
 Adds local times to the aircraft performance page.

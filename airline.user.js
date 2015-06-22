@@ -36,12 +36,12 @@
         },
         1: {
             departureTime: "Abflugszeit (lokal)",
-            returnTime: "Rückflugsabflugszeit (lokal)",
+            returnTime: "R&uuml;ckflugsabflugszeit (lokal)",
             departureTimeUTC: "Abflugszeit (lokal ",
             arrivalTimeUTC: "Ankunftszeit (lokal ",
-            customTurnaroundTime: "Gewählte Turnaround-Zeit",
-            returnDepartureTimeUTC: "Rückflugsabflugszeit (lokal ",
-            returnArrivalTimeUTC: "Rückflugsankunftszeit (lokal ",
+            customTurnaroundTime: "Gew&auml;hlte Turnaround-Zeit",
+            returnDepartureTimeUTC: "R&uuml;ckflugsabflugszeit (lokal ",
+            returnArrivalTimeUTC: "R&uuml;ckflugsankunftszeit (lokal ",
             maxPassengers: "Maximale Passagiere",
             noEarlier: "NET"
         }
