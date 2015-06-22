@@ -10,7 +10,7 @@
 (function() {
     "use strict";
 
-    var logLevel = 1;
+    var logLevel = 0;
 
     var startAirport = $("#dep").val();
     var endAirport = $("#arr").val();
@@ -18,7 +18,7 @@
     log("start:" + startAirport,1);
     log("end:" + endAirport,1);
 
-    var payload = $("th:contains('Maximum payload') + td").text().replace(/\D/g,'');
+    var payload = $("th:contains('Calculated payload') + td").text().replace(/\D/g,'');
     var ft = $("th:contains('Flight time') + td").text().split(":");
     var flightTime = ft[0]*60+1*ft[1];
     var tt = $("th:contains('Turnaround time') + td").text().split(":");
