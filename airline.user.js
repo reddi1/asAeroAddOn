@@ -1,16 +1,18 @@
 // ==UserScript==
-// @name AirlineSim AddOn Script
+// @name asAeroAddOn Script
 // @description Adds local times to the aircraft performance page.
-// @version 0.1
+// @version 0.2
 // @match *://*.airlinesim.aero/action/enterprise/aircraftsPerformance*dep=*
 // @match *://airlinesim.aero/action/enterprise/aircraftsPerformance*dep=*
 // @grant none
+// @updateURL https://raw.githubusercontent.com/reddi1/asAeroAddOn/master/airline.user.js
+// @downloadURL https://raw.githubusercontent.com/reddi1/asAeroAddOn/master/airline.user.js
 // ==/UserScript==
 
 (function() {
     "use strict";
 
-    var logLevel = 4;
+    var logLevel = 0;
 
     var lang = $("img:not('.flag')[title]").attr("title");
     var languages = ["English","German"];
