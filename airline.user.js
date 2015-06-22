@@ -12,6 +12,36 @@
 
     var logLevel = 4;
 
+    var lang = $("img:not('.flag')[title]").attr("title");
+    var languages = ["English","German"];
+    var l = languages.indexOf(lang);
+    if (l==-1) {
+        l = 0;
+    }
+
+    var localization = {
+        0: {
+            departureTime :  "Departure time (local)",
+            returnTime : "Return departure time (local)",
+            departureTimeUTC: "Departure time (local ",
+            arrivalTimeUTC: "Arrival time (local ",
+            returnDepartureTimeUTC: "Return departure time (local ",
+            returnArrivalTimeUTC: "Return arrival time (local ",
+            maxPassengers: "Max passengers"
+        },
+        1: {
+            departureTime :  "Abflugszeit (lokal)",
+            returnTime : "Rückflugsabflugszeit (lokal)",
+            departureTimeUTC: "Abflugszeit (lokal ",
+            arrivalTimeUTC: "Ankunftszeit (lokal ",
+            returnDepartureTimeUTC: "Rückflugsabflugszeit (lokal ",
+            returnArrivalTimeUTC: "Rückflugsankunftszeit (lokal ",
+            maxPassengers: "Maximale Passagiere"
+        }
+    }
+
+    var t = localization[l];
+
     var startAirport = $("#dep").val();
     var endAirport = $("#arr").val();
 
@@ -40,8 +70,8 @@
     log("going from " + startTZ + " to " + endTZ, 1);
 
     addPanel($("h3:eq(3) + div"));
-    addTimeSelector("Departure time (local)",startTZ,"startFlight");
-    addTimeSelector("Return departure time (local)",endTZ,"returnFlight");
+    addTimeSelector(t.departureTime,startTZ,"startFlight");
+    addTimeSelector(t.returnTime,endTZ,"returnFlight");
     updateTimes({data:{id:"startFlight"}});
     updateTimes({data:{id:"returnFlight"}});
 
@@ -55,11 +85,11 @@
     function addPanel(node) {
         var tbody = $("<tbody></tbody>");
         var panel = $("<div></div>").addClass("as-panel").append($("<div></div>").addClass("as-table-well").append($("<table></table>").addClass("table").append(tbody)));
-        addRow(tbody,"Departure time (local "+makeUTC(startTZ)+")","0","startFlightDepTime");
-        addRow(tbody,"Arrival time (local "+makeUTC(endTZ)+")","0","startFlightArrTime");
-        addRow(tbody,"Return departure time (local "+makeUTC(endTZ)+")","0","returnFlightDepTime");
-        addRow(tbody,"Return arrival time (local "+makeUTC(startTZ)+")","0","returnFlightArrTime");
-        addRow(tbody,"Max passengers",Math.floor(payload/95),"maxPassengers");
+        addRow(tbody, t.departureTimeUTC+makeUTC(startTZ)+")","0","startFlightDepTime");
+        addRow(tbody, t.arrivalTimeUTC+makeUTC(endTZ)+")","0","startFlightArrTime");
+        addRow(tbody, t.returnDepartureTimeUTC+makeUTC(endTZ)+")","0","returnFlightDepTime");
+        addRow(tbody, t.returnArrivalTimeUTC+makeUTC(startTZ)+")","0","returnFlightArrTime");
+        addRow(tbody, t.maxPassengers,Math.floor(payload/95),"maxPassengers");
         panel.insertAfter(node);
     }
 
