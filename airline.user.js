@@ -1,5 +1,6 @@
 // ==UserScript==
 // @name asAeroAddOn Script
+// @namespace https://github.com/reddi1/asAeroAddOn
 // @description Adds local times to the aircraft performance page.
 // @version 0.2
 // @match *://*.airlinesim.aero/action/enterprise/aircraftsPerformance*dep=*
