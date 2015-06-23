@@ -2,7 +2,7 @@
 // @name asAeroAddOn Script
 // @namespace https://github.com/reddi1/asAeroAddOn
 // @description Adds local times to the aircraft performance page.
-// @version 0.2
+// @version 0.2.1
 // @match *://*.airlinesim.aero/action/enterprise/aircraftsPerformance*dep=*
 // @match *://airlinesim.aero/action/enterprise/aircraftsPerformance*dep=*
 // @grant none
@@ -28,7 +28,7 @@
             returnTime: "Return departure time (local)",
             departureTimeUTC: "Departure time (local ",
             arrivalTimeUTC: "Arrival time (local ",
-            customTurnaroundTime: "Custom turnaround time",
+            customTurnaroundTime: "Ground time",
             returnDepartureTimeUTC: "Return departure time (local ",
             returnArrivalTimeUTC: "Return arrival time (local ",
             maxPassengers: "Max passengers",
@@ -36,12 +36,12 @@
         },
         1: {
             departureTime: "Abflugszeit (lokal)",
-            returnTime: "R&uuml;ckflugsabflugszeit (lokal)",
+            returnTime: "Rückflugsabflugszeit (lokal)",
             departureTimeUTC: "Abflugszeit (lokal ",
             arrivalTimeUTC: "Ankunftszeit (lokal ",
-            customTurnaroundTime: "Gew&auml;hlte Turnaround-Zeit",
-            returnDepartureTimeUTC: "R&uuml;ckflugsabflugszeit (lokal ",
-            returnArrivalTimeUTC: "R&uuml;ckflugsankunftszeit (lokal ",
+            customTurnaroundTime: "Bodenzeit",
+            returnDepartureTimeUTC: "Rückflugsabflugszeit (lokal ",
+            returnArrivalTimeUTC: "Rückflugsankunftszeit (lokal ",
             maxPassengers: "Maximale Passagiere",
             noEarlier: "NET"
         }
