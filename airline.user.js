@@ -2,7 +2,7 @@
 // @name asAeroAddOn Script
 // @namespace https://github.com/reddi1/asAeroAddOn
 // @description Adds local times to the aircraft performance page.
-// @version 0.2.1
+// @version 0.2.2
 // @match *://*.airlinesim.aero/action/enterprise/aircraftsPerformance*dep=*
 // @match *://airlinesim.aero/action/enterprise/aircraftsPerformance*dep=*
 // @grant none
@@ -32,7 +32,7 @@
             returnDepartureTimeUTC: "Return departure time (local ",
             returnArrivalTimeUTC: "Return arrival time (local ",
             maxPassengers: "Max passengers",
-            noEarlier: "NET"
+            noEarlier: "Earliest departure time"
         },
         1: {
             departureTime: "Abflugszeit (lokal)",
@@ -43,7 +43,7 @@
             returnDepartureTimeUTC: "Rückflugsabflugszeit (lokal ",
             returnArrivalTimeUTC: "Rückflugsankunftszeit (lokal ",
             maxPassengers: "Maximale Passagiere",
-            noEarlier: "NET"
+            noEarlier: "Frühste Abflugzeit"
         }
     };
 
@@ -95,6 +95,7 @@
         addRow(tbody, t.departureTimeUTC+makeUTC(startTZ)+")","0","startFlightDepTime");
         addRow(tbody, t.arrivalTimeUTC+makeUTC(endTZ)+")","0","startFlightArrTime");
         addRow(tbody, t.customTurnaroundTime,"0","customTurnaroundTime");
+        addRow(tbody, t.noEarlier,"0","noEarlier");
         addRow(tbody, t.returnDepartureTimeUTC+makeUTC(endTZ)+")","0","returnFlightDepTime");
         addRow(tbody, t.returnArrivalTimeUTC+makeUTC(startTZ)+")","0","returnFlightArrTime");
         addRow(tbody, t.maxPassengers,Math.floor(payload/95),"maxPassengers");
@@ -167,9 +168,10 @@
         if (id=="startFlight") {
             var rDepTime = (arrTime + turnTime)%(24*60);
             log("Return Departure: " + rDepTime, 4);
-            $("#returnFlightTimeSelector").text(t.returnTime + " "+ t.noEarlier+" "+minToTime(rDepTime));
+            $("#noEarlier").text(minToTime(rDepTime));
             $("#returnFlightTimeH option").prop("selected",false).filter("[value='"+Math.floor(rDepTime/60)+"']").prop("selected",true);
             $("#returnFlightTimeM option").prop("selected",false).filter("[value='"+rDepTime%60+"']").prop("selected",true);
+            $("#returnFlightTimeH").change();
         }
         $("#customTurnaroundTime").text(
             minToTime(
