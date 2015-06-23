@@ -2,7 +2,7 @@
 // @name asAeroAddOn Script
 // @namespace https://github.com/reddi1/asAeroAddOn
 // @description Adds local times to the aircraft performance page.
-// @version 0.2.2
+// @version 0.2.3
 // @match *://*.airlinesim.aero/action/enterprise/aircraftsPerformance*dep=*
 // @match *://airlinesim.aero/action/enterprise/aircraftsPerformance*dep=*
 // @grant none
@@ -77,10 +77,10 @@
     log("going from " + startTZ + " to " + endTZ, 1);
 
     addPanel($("h3:eq(3) + div"));
-    addTimeSelector(t.departureTime,startTZ,"startFlight");
-    addTimeSelector(t.returnTime,endTZ,"returnFlight");
-    updateTimes({data:{id:"startFlight"}});
-    updateTimes({data:{id:"returnFlight"}});
+    addTimeSelector(t.departureTime,startTZ,"startFlight",1);
+    addTimeSelector(t.returnTime,endTZ,"returnFlight",-1);
+    updateTimes({data:{id:"startFlight",dir:1}});
+    updateTimes({data:{id:"returnFlight",dir:-1}});
 
     function addRow(tbody, s, s2,id) {
         var row = $('<tr></tr>').addClass("row");
@@ -117,7 +117,7 @@
         return select;
     }
 
-    function addTimeSelector(l,tz,id) {
+    function addTimeSelector(l,tz,id,dir) {
         var label = $("<label></label>").text(l).attr("id",id+"TimeSelector");
         var divo = $("<div></div>").addClass("form-group");
         var div = $("<div></div>").addClass("input-group");
@@ -133,8 +133,8 @@
         divo.append(div);
         var form = $("form[action='aircraftsPerformance']");
         form.append(divo);
-        selecth.change({id: id},updateTimes);
-        selectm.change({id: id},updateTimes);
+        selecth.change({id: id,dir:dir},updateTimes);
+        selectm.change({id: id,dir:dir},updateTimes);
     }
 
     function makeTime(h,m) {
@@ -154,6 +154,7 @@
 
     function updateTimes(event) {
         var id = event.data.id;
+        var dir = event.data.dir;
         log("update to "+id,1);
         var h = $("#"+id+"TimeH").val();
         var m = $("#"+id+"TimeM").val();
@@ -162,7 +163,7 @@
         log("Departure: " + depMin, 4);
         log("TimeDiff: " + timeDiff, 4);
         log("FlightTime: " + flightTime, 4);
-        var arrTime = (depMin + flightTime - timeDiff)%(24*60);
+        var arrTime = (depMin + flightTime - dir*timeDiff)%(24*60);
         log("Arrival: " + arrTime, 4);
         $("#"+id+"ArrTime").text(minToTime(arrTime)).data("min",arrTime);
         if (id=="startFlight") {
@@ -177,10 +178,6 @@
             minToTime(
                 ($("#returnFlightTimeH").val()*60+1*$("#returnFlightTimeM").val()-$("#startFlightArrTime").data("min")+24*60)%(24*60)
             ));
-        //$("#rDepTime").text(minToTime(rDepTime));
-        //var rArrTime = (rDepTime + flightTime + timeDiff)%(24*60);
-        //log("Return Arrival: " + rArrTime, 4);
-        //$("#rArrTime").text(minToTime(rArrTime));
     }
 
     function log(msg,lvl) {
